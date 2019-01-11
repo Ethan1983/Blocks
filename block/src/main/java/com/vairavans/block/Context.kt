@@ -23,20 +23,20 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
 
-internal fun Context.toast( @StringRes messageResId : Int, duration : Int = Toast.LENGTH_SHORT ) =
-        toast( getString( messageResId ), duration )
+fun Context.toast( @StringRes messageResId : Int, duration : Int = Toast.LENGTH_SHORT ) =
+    toast( getString( messageResId ), duration )
 
-internal fun Context.toast( message : String, duration : Int = Toast.LENGTH_SHORT ) =
-        Toast.makeText( this, message, duration ).show()
+fun Context.toast( message : String, duration : Int = Toast.LENGTH_SHORT ) =
+    Toast.makeText( this, message, duration ).show()
 
-internal inline fun Context.createAndShowAlertDialog( crossinline block : AlertDialog.Builder.() -> Unit ) : AlertDialog {
+inline fun Context.createAndShowAlertDialog( crossinline block : AlertDialog.Builder.() -> Unit ) : AlertDialog {
 
     return AlertDialog.Builder( this ).apply {
         block()
     }.show()
 }
 
-internal inline fun Context.notification( channelId : String, crossinline block : NotificationCompat.Builder.() -> Unit ) : Notification {
+inline fun Context.notification( channelId : String, crossinline block : NotificationCompat.Builder.() -> Unit ) : Notification {
     return with( NotificationCompat.Builder( this, channelId ) ) {
         block()
         build()

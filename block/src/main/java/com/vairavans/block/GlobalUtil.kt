@@ -20,7 +20,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 
-internal inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) : BroadcastReceiver {
+inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) : BroadcastReceiver {
 
     return object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) = handler( context, intent )
