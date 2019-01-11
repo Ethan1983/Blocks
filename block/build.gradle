@@ -37,3 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     testImplementation 'org.robolectric:robolectric:4.0.2'
 }
+
+apply from: 'publish.gradle'
