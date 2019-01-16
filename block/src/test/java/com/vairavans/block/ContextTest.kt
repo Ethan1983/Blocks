@@ -17,9 +17,12 @@
 package com.vairavans.block
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,6 +40,10 @@ class ContextTest {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setTheme( R.style.Theme_AppCompat )
+        }
+
+        override fun startActivity(intent: Intent) {
+            // Empty Implementation
         }
     }
 
@@ -112,5 +119,33 @@ class ContextTest {
         assert( dialog.isShowing ) {
             "Context.createAndShowAlertDialog did not show the created dialog"
         }
+    }
+
+    @Test
+    fun `startActivity handles unresolved intent`() {
+
+        var activityNotFoundHandlerInvoked = false
+        val intent = mockk<Intent>()
+        every { intent.resolveActivity( context.packageManager ) } returns null
+
+        context.startActivity( intent ) {
+            activityNotFoundHandlerInvoked = true
+        }
+
+        assert(activityNotFoundHandlerInvoked)
+    }
+
+    @Test
+    fun `startActivity handles resolved intent`() {
+
+        var activityNotFoundHandlerInvoked = false
+        val intent = mockk<Intent>()
+        every { intent.resolveActivity( context.packageManager ) } returns mockk()
+
+        context.startActivity( intent ) {
+            activityNotFoundHandlerInvoked = true
+        }
+
+        assert(!activityNotFoundHandlerInvoked)
     }
 }

@@ -18,6 +18,7 @@ package com.vairavans.block
 
 import android.app.Notification
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -41,4 +42,14 @@ inline fun Context.notification( channelId : String, crossinline block : Notific
         block()
         build()
     }
+}
+
+inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : () -> Unit ) {
+
+    intent.resolveActivity( packageManager )?.let {
+        startActivity( intent )
+    } ?: run {
+        activityNotFoundHandler()
+    }
+
 }
