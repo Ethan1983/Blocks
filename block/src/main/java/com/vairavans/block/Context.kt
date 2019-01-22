@@ -17,8 +17,10 @@
 package com.vairavans.block
 
 import android.app.Notification
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -52,4 +54,13 @@ inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : () -
         activityNotFoundHandler()
     }
 
+}
+
+inline fun <reified T> Context.setComponentEnabledSetting( newState: Int,
+                                                           flags : Int = PackageManager.DONT_KILL_APP ) {
+    packageManager.setComponentEnabledSetting(
+        ComponentName( this, T::class.java ),
+        newState,
+        flags
+    )
 }
