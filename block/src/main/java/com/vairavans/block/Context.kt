@@ -17,11 +17,15 @@
 package com.vairavans.block
 
 import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
@@ -44,6 +48,16 @@ inline fun Context.notification( channelId : String, crossinline block : Notific
         block()
         build()
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+inline fun Context.createNotificationChannel( id : String, name : CharSequence, importance : Int,
+                                              block : NotificationChannel.() -> Unit = {} ) : NotificationChannel {
+
+    val channel = NotificationChannel( id, name, importance ).apply( block )
+    val notificationManager = getSystemService( Context.NOTIFICATION_SERVICE ) as NotificationManager
+    notificationManager.createNotificationChannel( channel )
+    return channel
 }
 
 inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : () -> Unit ) {

@@ -16,13 +16,18 @@
 
 package com.vairavans.block
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH
+import androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -147,5 +152,95 @@ class ContextTest {
         }
 
         assert(!activityNotFoundHandlerInvoked)
+    }
+
+    @Test
+    fun `createNotificationChannel should invoke provided lambda on specified channel`() {
+
+        var lambdaInvoked = false
+        val channelId = NotificationChannel.DEFAULT_CHANNEL_ID
+        val channelName = "Channel Name"
+        val importance = IMPORTANCE_LOW
+
+        context.createNotificationChannel( channelId, channelName, importance ) {
+            lambdaInvoked = true
+        }
+
+        assert( lambdaInvoked ) {
+            "Context.createNotificationChannel did not invoke provided lambda on the specified channel"
+        }
+    }
+
+    @Test
+    fun `createNotificationChannel should apply provided values on specified channel`() {
+
+        val channelId = NotificationChannel.DEFAULT_CHANNEL_ID
+        val channelName = "Channel Name"
+        val importance = IMPORTANCE_HIGH
+
+        val channel = context.createNotificationChannel( channelId, channelName, importance )
+
+        assert( channel.id == channelId ) {
+            "Context.createNotificationChannel did not apply provided ID on the specified channel"
+        }
+
+        assert( channel.name == channelName ) {
+            "Context.createNotificationChannel did not apply provided Name on the specified channel"
+        }
+
+        assert( channel.importance == importance ) {
+            "Context.createNotificationChannel did not apply provided Importance on the specified channel"
+        }
+    }
+
+    @Test
+    fun `createNotificationChannel should apply provided lambda on specified channel`() {
+
+        val channelId = NotificationChannel.DEFAULT_CHANNEL_ID
+        val channelName = "Channel Name"
+        val channelDescription = "Channel Description"
+        val importance = IMPORTANCE_LOW
+
+        val channel = context.createNotificationChannel( channelId, channelName, importance ) {
+            description = channelDescription
+        }
+
+        assert( channel.description == channelDescription ) {
+            "Context.createNotificationChannel did not apply provided lambda on the specified channel"
+        }
+    }
+
+    @Test
+    fun `createNotificationChannel registers channel with NotificationManager`() {
+
+        val channelId = NotificationChannel.DEFAULT_CHANNEL_ID
+        val channelName = "Channel Name"
+        val channelDescription = "Channel Description"
+        val importance = IMPORTANCE_LOW
+        val notificationManager = context.getSystemService( Context.NOTIFICATION_SERVICE ) as NotificationManager
+
+        context.createNotificationChannel( channelId, channelName, importance ) {
+            description = channelDescription
+        }
+
+        val createdChannel = notificationManager.getNotificationChannel( channelId )
+
+        assertNotNull( "Channel not registered with NotificationManager", createdChannel )
+
+        assert( createdChannel.id == channelId ) {
+            "Context.createNotificationChannel did not apply provided ID on the specified channel"
+        }
+
+        assert( createdChannel.name == channelName ) {
+            "Context.createNotificationChannel did not apply provided Name on the specified channel"
+        }
+
+        assert( createdChannel.importance == importance ) {
+            "Context.createNotificationChannel did not apply provided Importance on the specified channel"
+        }
+
+        assert( createdChannel.description == channelDescription ) {
+            "Context.createNotificationChannel did not apply provided Description on the specified channel"
+        }
     }
 }
