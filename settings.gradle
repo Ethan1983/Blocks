@@ -1,1 +1,1 @@
-include ':block'
+include ':block', ':dagger'

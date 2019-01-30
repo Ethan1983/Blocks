@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/block" />
+            <option value="$PROJECT_DIR$/dagger" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
