@@ -19,6 +19,7 @@ package com.vairavans.block
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.Service
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -29,6 +30,7 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 
 fun Context.toast( @StringRes messageResId : Int, duration : Int = Toast.LENGTH_SHORT ) =
     toast( getString( messageResId ), duration )
@@ -68,6 +70,14 @@ inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : () -
         activityNotFoundHandler()
     }
 
+}
+
+inline fun <reified T : Service> Context.startForegroundService( block : Intent.() -> Unit = {} ) : Intent {
+
+    return Intent( this, T::class.java ).also {
+        block( it )
+        ContextCompat.startForegroundService( this, it )
+    }
 }
 
 inline fun <reified T> Context.setComponentEnabledSetting( newState: Int,

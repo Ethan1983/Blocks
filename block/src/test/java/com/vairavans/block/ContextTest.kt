@@ -18,9 +18,11 @@ package com.vairavans.block
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH
@@ -34,6 +36,7 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import java.lang.UnsupportedOperationException
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest=Config.NONE)
@@ -49,6 +52,12 @@ class ContextTest {
 
         override fun startActivity(intent: Intent) {
             // Empty Implementation
+        }
+    }
+
+    private class SampleService : Service() {
+        override fun onBind(intent: Intent?): IBinder? {
+            throw UnsupportedOperationException( "Bind is not supported" )
         }
     }
 
@@ -241,6 +250,37 @@ class ContextTest {
 
         assert( createdChannel.description == channelDescription ) {
             "Context.createNotificationChannel did not apply provided Description on the specified channel"
+        }
+    }
+
+    @Test
+    fun `startForegroundService invokes provided lambda`() {
+
+        var lambdaInvoked = false
+
+        context.startForegroundService<SampleService> {
+            lambdaInvoked = true
+        }
+
+        assert( lambdaInvoked ) {
+            "Context.startForegroundService did not invoke provided lambda"
+        }
+    }
+
+    @Test
+    fun `startForegroundService applies provided values on returned intent`() {
+
+        val key = "Key"
+        val value = "Value"
+
+        val intent = context.startForegroundService<SampleService> {
+            putExtra( key, value )
+        }
+
+        assertNotNull( intent )
+
+        assert( intent.getStringExtra( key ) == value ) {
+            "Context.startForegroundService did not apply provided value on returned intent"
         }
     }
 }
