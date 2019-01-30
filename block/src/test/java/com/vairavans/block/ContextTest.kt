@@ -19,8 +19,10 @@ package com.vairavans.block
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
@@ -282,5 +284,62 @@ class ContextTest {
         assert( intent.getStringExtra( key ) == value ) {
             "Context.startForegroundService did not apply provided value on returned intent"
         }
+    }
+
+    @Test
+    fun `setComponentEnabledSetting enables disabled component`() {
+
+        val component = ComponentName( context, SampleService::class.java )
+
+        context.packageManager.setComponentEnabledSetting( component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP )
+
+        context.setComponentEnabledSetting<SampleService>( PackageManager.COMPONENT_ENABLED_STATE_ENABLED )
+
+        assert( context.packageManager.getComponentEnabledSetting( component ) ==
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED )
+    }
+
+    @Test
+    fun `setComponentEnabledSetting does not enable on disable request of disabled component`() {
+
+        val component = ComponentName( context, SampleService::class.java )
+
+        context.packageManager.setComponentEnabledSetting( component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP )
+
+        context.setComponentEnabledSetting<SampleService>( PackageManager.COMPONENT_ENABLED_STATE_DISABLED )
+
+        assert( context.packageManager.getComponentEnabledSetting( component ) !=
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED )
+    }
+
+    @Test
+    fun `setComponentEnabledSetting disables enabled component`() {
+
+        val component = ComponentName( context, SampleService::class.java )
+
+        context.packageManager.setComponentEnabledSetting( component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP )
+
+        context.setComponentEnabledSetting<SampleService>( PackageManager.COMPONENT_ENABLED_STATE_DISABLED )
+
+        assert( context.packageManager.getComponentEnabledSetting( component ) ==
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED )
+
+    }
+
+    @Test
+    fun `setComponentEnabledSetting does not disable on enable request of enabled component`() {
+
+        val component = ComponentName( context, SampleService::class.java )
+
+        context.packageManager.setComponentEnabledSetting( component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP )
+
+        context.setComponentEnabledSetting<SampleService>( PackageManager.COMPONENT_ENABLED_STATE_ENABLED )
+
+        assert( context.packageManager.getComponentEnabledSetting( component ) !=
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED )
     }
 }
