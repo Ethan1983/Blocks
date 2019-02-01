@@ -29,12 +29,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api project(':dagger')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.google.dagger:dagger-android-support:2.21'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'io.mockk:mockk:1.9'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
-
-apply from: 'publish.gradle'
