@@ -30,5 +30,5 @@ abstract class AbsDaggerAnalyticsFragment< T : ViewModel> : AbsDaggerFragment<T>
         firebaseAnalytics.setCurrentScreen( getActivityInternal(), null, null )
     }
 
-    protected open fun getActivityInternal() : FragmentActivity = requireActivity()
+    internal open fun getActivityInternal() : FragmentActivity = requireActivity()
 }
