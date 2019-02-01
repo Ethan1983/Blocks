@@ -1,13 +1,13 @@
 package com.vairavans.daggerworkmanager
 
-import android.app.Application
 import androidx.annotation.CallSuper
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import androidx.work.WorkerFactory
+import dagger.android.support.DaggerApplication
 import javax.inject.Inject
 
-abstract class AbsDaggerApplication : Application() {
+abstract class AbsDaggerApplication : DaggerApplication() {
 
     @Inject
     lateinit var workerFactory : WorkerFactory
