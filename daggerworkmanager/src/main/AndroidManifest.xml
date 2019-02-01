@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.vairavans.daggerworkmanager">
+
+    <application>
+
+        <provider android:authorities="${applicationId}.workmanager-init"
+                  android:name="androidx.work.impl.WorkManagerInitializer"
+                  tools:node="remove"/>
+
+    </application>
+
+</manifest>

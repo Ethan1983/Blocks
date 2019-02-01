@@ -1,1 +1,1 @@
-include ':block', ':dagger', ':analytics'
+include ':block', ':dagger', ':analytics', ':daggerworkmanager'
