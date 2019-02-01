@@ -29,7 +29,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api project(':dagger')
+    implementation project(':dagger')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.google.firebase:firebase-core:16.0.6'
