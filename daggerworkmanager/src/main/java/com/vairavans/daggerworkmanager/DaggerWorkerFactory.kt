@@ -1,4 +1,4 @@
-package com.vairavans.dagger
+package com.vairavans.daggerworkmanager
 
 import android.content.Context
 import androidx.work.ListenableWorker
