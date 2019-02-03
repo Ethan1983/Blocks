@@ -27,8 +27,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.google.dagger:dagger-android-support:2.21'
-    implementation 'android.arch.work:work-runtime-ktx:1.0.0-beta03'
+    api ('com.google.dagger:dagger-android-support:2.21') {
+        because 'HasSupportFragmentInjector is exposed as a supertype of AbsDaggerApplication'
+    }
+    api ('android.arch.work:work-runtime-ktx:1.0.0-beta03') {
+        because 'ListenableWorker is exposed as public api'
+    }
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

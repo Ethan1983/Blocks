@@ -21,7 +21,6 @@ abstract class AbsDaggerAnalyticsFragment< T : ViewModel> : AbsDaggerFragment<T>
         super.onResume()
         firebaseAnalytics.setCurrentScreen( getActivityInternal(), firebaseAnalyticsScreenName,
             firebaseAnalyticsScreenClassOverride )
-        activity
     }
 
     @CallSuper

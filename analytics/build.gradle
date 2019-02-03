@@ -29,10 +29,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':dagger')
+    api (project(':dagger')) {
+        because 'dagger exposes HasSupportFragmentInjector as supertype'
+    }
+    api ('com.google.firebase:firebase-core:16.0.7' ) {
+        because 'FirebaseAnalytics is exposed in public API'
+    }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'javax.inject:javax.inject:1'
-    implementation 'com.google.firebase:firebase-core:16.0.6'
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.mockk:mockk:1.9'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
