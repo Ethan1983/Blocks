@@ -61,11 +61,11 @@ class DebugTagTree( val stackElementTag : String? ) : Timber.DebugTree() {
 inline fun getTimberDebugTree( crossinline block : () -> String? = { null } ) : DebugTagTree =
     DebugTagTree( block() )
 
-private fun showSnackBar(view : View,
-                         @StringRes messageResId : Int,
-                         @StringRes undoResId : Int,
-                         duration : Int = Snackbar.LENGTH_SHORT,
-                         undoActionHandler : (() -> Unit)? = null ) : Snackbar {
+fun showSnackBar(view : View,
+                 @StringRes messageResId : Int,
+                 @StringRes undoResId : Int,
+                 duration : Int = Snackbar.LENGTH_SHORT,
+                 undoActionHandler : (() -> Unit)? = null ) : Snackbar {
 
     val snackBar = Snackbar.make( view, messageResId, duration )
 
