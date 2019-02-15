@@ -17,10 +17,11 @@ In your module `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.vairavans.block:block:1.0.6'
-  implementation 'com.vairavans.dagger:dagger:1.0.2'
-  implementation 'com.vairavans.analytics:analytics:1.0.1'
-  implementation 'com.vairavans.daggerworkmanager:daggerworkmanager:1.0.1'
+  implementation 'com.vairavans.block:block:1.0.7'
+  implementation 'com.vairavans.dagger:dagger:1.0.3'
+  implementation 'com.vairavans.analytics:analytics:1.0.2'
+  implementation 'com.vairavans.daggerworkmanager:daggerworkmanager:1.0.2'
+  implementation 'com.vairavans.espresso:espresso:1.0.0'
 }
 ```
 
