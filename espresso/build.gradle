@@ -24,18 +24,26 @@ android {
         }
     }
 
+    testOptions {
+        // http://tools.android.com/tech-docs/unit-testing-support#TOC-Method-...-not-mocked.-
+        // CountingIdlingResource uses android.text.TextUtils and android.os.SystemClock, the stub version
+        // of these throws an exception and fails unit tests in MainFragmentViewModelTest. The following
+        // flag overrides these methods to return default values instead.
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation ('androidx.lifecycle:lifecycle-extensions:2.0.0') {
-        because 'of ViewModelProviders and is an implementation detail'
+    api ('androidx.test.espresso:espresso-idling-resource:3.1.1') {
+        because 'IdlingResource as exposed as a public type'
     }
-    api ('com.google.dagger:dagger-android-support:2.21') {
-        because 'api as HasSupportFragmentInjector is exposed as supertype'
-    }
+    testImplementation 'junit:junit:4.12'
 }
 
-apply from: 'publish.gradle'
+repositories {
+    mavenCentral()
+}

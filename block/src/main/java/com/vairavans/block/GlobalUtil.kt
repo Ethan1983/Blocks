@@ -19,6 +19,10 @@ package com.vairavans.block
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
+import timber.log.Timber
 
 inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) : BroadcastReceiver {
 
@@ -45,4 +49,33 @@ inline fun <T, U> multiLet( param1 : T?, param2 : U?, block : (T, U) -> Unit ) {
         block( param1, param2 )
     }
 
+}
+
+class DebugTagTree( val stackElementTag : String? ) : Timber.DebugTree() {
+
+    override fun createStackElementTag(element: StackTraceElement): String =
+        stackElementTag ?: super.createStackElementTag(element) + ":" + element.lineNumber
+}
+
+@Suppress("PROTECTED_CALL_FROM_PUBLIC_INLINE")
+inline fun getTimberDebugTree( crossinline block : () -> String? = { null } ) : DebugTagTree =
+    DebugTagTree( block() )
+
+private fun showSnackBar(view : View,
+                         @StringRes messageResId : Int,
+                         @StringRes undoResId : Int,
+                         duration : Int = Snackbar.LENGTH_SHORT,
+                         undoActionHandler : (() -> Unit)? = null ) : Snackbar {
+
+    val snackBar = Snackbar.make( view, messageResId, duration )
+
+    undoActionHandler?.let {
+        snackBar.setAction( undoResId ) {
+            undoActionHandler()
+        }
+    }
+
+    snackBar.show()
+
+    return snackBar
 }

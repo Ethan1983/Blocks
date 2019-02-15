@@ -25,19 +25,32 @@ android {
         }
     }
 
+    testOptions {
+        // http://tools.android.com/tech-docs/unit-testing-support#TOC-Method-...-not-mocked.-
+        // CountingIdlingResource uses android.text.TextUtils and android.os.SystemClock, the stub version
+        // of these throws an exception and fails unit tests in MainFragmentViewModelTest. The following
+        // flag overrides these methods to return default values instead.
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api (project(":espresso")) {
+        because 'EspressoCountingGlobalIdlingResource is exposed as public type'
+    }
     implementation 'androidx.annotation:annotation:1.0.1'
     implementation 'androidx.core:core:1.1.0-alpha04'
     debugImplementation 'androidx.fragment:fragment:1.1.0-alpha04'
     debugImplementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha02'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.google.android.material:material:1.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.0.2'
     testImplementation 'io.mockk:mockk:1.9'

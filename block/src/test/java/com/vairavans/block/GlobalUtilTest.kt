@@ -146,4 +146,28 @@ class GlobalUtilTest {
         }
 
     }
+
+    @Test
+    fun `getTimberDebugTree uses provided tag`() {
+
+        val customTag = "CustomTag"
+
+        val tree = getTimberDebugTree {
+            customTag
+        }
+
+        assert( tree.stackElementTag == customTag ) {
+            "Provided tag is not used by Timber Debug Tree"
+        }
+    }
+
+    @Test
+    fun `getTimberDebugTree works without any provided tag`() {
+
+        val tree = getTimberDebugTree()
+
+        assert( tree.stackElementTag == null ) {
+            "stackElementTag is not null"
+        }
+    }
 }
