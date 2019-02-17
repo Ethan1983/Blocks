@@ -20,8 +20,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
 
-inline fun Spinner.setOnItemSelectedListener(crossinline onItemSelected : (AdapterView<*>, View?, Int, Long) -> Unit = {_,_,_,_ -> },
-                                             crossinline onNothingSelected: (AdapterView<*>) -> Unit = {}) {
+inline fun Spinner.setOnItemSelectedListener(
+    crossinline onItemSelected : (AdapterView<*>, View?, Int, Long) -> Unit = {_,_,_,_ -> },
+    crossinline onNothingSelected: (AdapterView<*>) -> Unit = {}) {
 
     onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 

@@ -45,7 +45,8 @@ inline fun Context.createAndShowAlertDialog( crossinline block : AlertDialog.Bui
     }.show()
 }
 
-inline fun Context.notification( channelId : String, crossinline block : NotificationCompat.Builder.() -> Unit ) : Notification {
+inline fun Context.notification( channelId : String, crossinline block : NotificationCompat.Builder.() -> Unit ) :
+        Notification {
     return with( NotificationCompat.Builder( this, channelId ) ) {
         block()
         build()

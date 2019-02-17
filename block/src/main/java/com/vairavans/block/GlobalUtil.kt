@@ -24,7 +24,8 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
-inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) : BroadcastReceiver {
+inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) :
+        BroadcastReceiver {
 
     return object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) = handler( context, intent )
@@ -38,7 +39,7 @@ inline fun < reified T : Any > executeOrHandleNull( value : T?, block : T.() -> 
         block( it )
         it
     } ?: run {
-        throw RuntimeException( "Unexpected null type for ${T::class.java}" )
+        throw NullPointerException( "Unexpected null type for ${T::class.java}" )
     }
 
 }

@@ -17,6 +17,7 @@
 package com.vairavans.block
 
 import org.junit.Test
+import java.lang.RuntimeException
 
 class GlobalUtilTest {
 
@@ -27,11 +28,28 @@ class GlobalUtilTest {
 
         try {
             executeOrHandleNull<Int>( null )
-        } catch( e : RuntimeException ) {
+        } catch( e : NullPointerException ) {
             exceptionRaised = true
         }
 
         assert( exceptionRaised ) {
+            "executeOrHandleNull didn't throw an exception on null input"
+        }
+
+    }
+
+    @Test
+    fun `executeOrHandleNull throws a specific nullpointerexception on null input`() {
+
+        var nullPointerExceptionRaised = false
+
+        try {
+            executeOrHandleNull<Int>( null )
+        } catch( e : RuntimeException ) {
+            nullPointerExceptionRaised = e is NullPointerException
+        }
+
+        assert( nullPointerExceptionRaised ) {
             "executeOrHandleNull didn't throw an exception on null input"
         }
 
@@ -44,7 +62,7 @@ class GlobalUtilTest {
 
         try {
             executeOrHandleNull( 3 )
-        } catch( e : RuntimeException ) {
+        } catch( e : NullPointerException ) {
             exceptionNotRaised = false
         }
 
