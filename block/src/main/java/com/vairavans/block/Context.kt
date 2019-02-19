@@ -63,12 +63,12 @@ inline fun Context.createNotificationChannel( id : String, name : CharSequence, 
     return channel
 }
 
-inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : () -> Unit ) {
+inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : (Context) -> Unit ) {
 
     intent.resolveActivity( packageManager )?.let {
         startActivity( intent )
     } ?: run {
-        activityNotFoundHandler()
+        activityNotFoundHandler(this)
     }
 
 }

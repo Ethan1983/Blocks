@@ -152,6 +152,20 @@ class ContextTest {
     }
 
     @Test
+    fun `startActivity gives same context in activityNotFoundHandler`() {
+
+        var sameContextReceived = false
+        val intent = mockk<Intent>()
+        every { intent.resolveActivity( context.packageManager ) } returns null
+
+        context.startActivity( intent ) { receivedContext ->
+            sameContextReceived = receivedContext == context
+        }
+
+        assert(sameContextReceived)
+    }
+
+    @Test
     fun `startActivity handles resolved intent`() {
 
         var activityNotFoundHandlerInvoked = false
