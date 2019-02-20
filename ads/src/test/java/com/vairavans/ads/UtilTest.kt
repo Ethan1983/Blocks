@@ -20,4 +20,18 @@ class UtilTest {
             "Lambda not called by adRequest"
         }
     }
+
+    @Test
+    fun `publisherAdRequest invokes specified lambda`() {
+
+        var lambdaInvoked = false
+
+        publisherAdRequest {
+            lambdaInvoked = true
+        }
+
+        assert( lambdaInvoked ) {
+            "Lambda not called by publisherAdRequest"
+        }
+    }
 }
