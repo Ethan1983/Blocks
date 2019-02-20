@@ -5,6 +5,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 
+/**
+ * Dagger Module for [FirebaseAnalytics]
+ */
 @Module
 abstract class FirebaseAnalyticsModule {
 

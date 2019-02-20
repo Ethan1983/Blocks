@@ -23,6 +23,9 @@ import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * DSL to get a [BroadcastReceiver].
+ */
 inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) :
         BroadcastReceiver {
 
@@ -32,6 +35,9 @@ inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Contex
 
 }
 
+/**
+ * A helper to avoid !! check on nullable values meant to avoid defensive [let]?.{} checks.
+ */
 inline fun < reified T : Any > executeOrHandleNull( value : T?, block : T.() -> Unit = {} ) : T {
 
     return value?.let {
@@ -43,6 +49,9 @@ inline fun < reified T : Any > executeOrHandleNull( value : T?, block : T.() -> 
 
 }
 
+/**
+ * A version of [let] but for two nullable values.
+ */
 inline fun <T, U> multiLet( param1 : T?, param2 : U?, block : (T, U) -> Unit ) {
 
     if( param1 != null && param2 != null ) {
@@ -51,10 +60,16 @@ inline fun <T, U> multiLet( param1 : T?, param2 : U?, block : (T, U) -> Unit ) {
 
 }
 
+/**
+ * DSL to get [DebugTagTree] tree.
+ */
 @Suppress("PROTECTED_CALL_FROM_PUBLIC_INLINE")
 inline fun getTimberDebugTree( crossinline block : () -> String? = { null } ) : DebugTagTree =
     DebugTagTree( block() )
 
+/**
+ * Helper to show a [Snackbar].
+ */
 fun showSnackBar(view : View,
                  @StringRes messageResId : Int,
                  @StringRes undoResId : Int,

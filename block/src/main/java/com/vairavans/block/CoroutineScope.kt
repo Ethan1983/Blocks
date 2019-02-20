@@ -8,6 +8,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+/**
+ * A version of [CoroutineScope.launch] supporting [EspressoCountingGlobalIdlingResource].
+ */
 fun CoroutineScope.idlingLaunch(context: CoroutineContext = EmptyCoroutineContext,
                                 start: CoroutineStart = CoroutineStart.DEFAULT,
                                 block: suspend CoroutineScope.() -> Unit ): Job {

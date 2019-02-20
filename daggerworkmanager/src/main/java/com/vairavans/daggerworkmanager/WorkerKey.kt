@@ -4,6 +4,9 @@ import androidx.work.ListenableWorker
 import dagger.MapKey
 import kotlin.reflect.KClass
 
+/**
+ * Key for Dagger [ListenableWorker] Multi bindings
+ */
 @MustBeDocumented
 @Target(
     AnnotationTarget.FUNCTION,

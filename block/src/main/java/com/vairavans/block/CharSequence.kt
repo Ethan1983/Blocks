@@ -1,3 +1,6 @@
 package com.vairavans.block
 
-fun CharSequence.toTypedArray() = split( " " ).toTypedArray()
+/**
+ * Extension of [CharSequence] to convert into a array of [CharSequence] split by space character.
+ */
+fun CharSequence.toTypedArray() : Array<CharSequence> = split( " " ).toTypedArray()

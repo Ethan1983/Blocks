@@ -7,6 +7,9 @@ import androidx.work.WorkerFactory
 import dagger.android.support.DaggerApplication
 import javax.inject.Inject
 
+/**
+ * A [DaggerApplication] with [WorkManager] initializations.
+ */
 abstract class AbsDaggerApplication : DaggerApplication() {
 
     @Inject

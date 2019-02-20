@@ -5,7 +5,10 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.ads.AdView
 
-class AdViewManager constructor( private val lifeCycle : Lifecycle, private val adView :AdView ) : LifecycleObserver {
+/**
+ * Lifecycle manager for [AdView]
+ */
+class AdViewManager constructor( private val lifeCycle : Lifecycle, private val adView : AdView ) : LifecycleObserver {
 
     init {
         lifeCycle.addObserver( this )

@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 
+/**
+ * Key for Dagger [ViewModel] Multi bindings
+ */
 @MustBeDocumented
 @Target(
     AnnotationTarget.FUNCTION,

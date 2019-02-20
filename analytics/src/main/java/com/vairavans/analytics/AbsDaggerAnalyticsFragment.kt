@@ -7,6 +7,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.vairavans.dagger.AbsDaggerFragment
 import javax.inject.Inject
 
+/**
+ * A [AbsDaggerFragment] with support for [FirebaseAnalytics]
+ */
 abstract class AbsDaggerAnalyticsFragment< T : ViewModel> : AbsDaggerFragment<T>() {
 
     @Inject

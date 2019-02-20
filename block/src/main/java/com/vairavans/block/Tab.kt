@@ -20,6 +20,9 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBar.Tab
 import androidx.fragment.app.FragmentTransaction
 
+/**
+ * Extension of [Tab] to register [onTabSelected], [onTabUnselected] and [onTabReselected] listeners.
+ */
 inline fun Tab.setTabListener(crossinline onTabSelected : (Tab, FragmentTransaction ) -> Unit = { _, _ -> },
                               crossinline onTabUnselected : (Tab, FragmentTransaction ) -> Unit = {_,_ -> },
                               crossinline onTabReselected : (Tab, FragmentTransaction ) -> Unit = {_,_ -> } ) : Tab {

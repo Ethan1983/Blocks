@@ -18,6 +18,9 @@ package com.vairavans.block
 
 import androidx.viewpager.widget.ViewPager
 
+/**
+ * An extension of [ViewPager] to register [onPageScrollStateChanged],[onPageScrolled] and [onPageSelected] listeners.
+ */
 inline fun ViewPager.addOnPageChangeListener ( crossinline onPageScrollStateChanged : (Int) -> Unit = {},
                                                crossinline onPageScrolled : (Int, Float, Int) -> Unit = { _, _, _ -> },
                                                crossinline onPageSelected : (Int) -> Unit = {} )

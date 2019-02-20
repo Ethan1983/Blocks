@@ -7,6 +7,9 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/**
+ * A factory to provide [ViewModel] based on configured multi bindings.
+ */
 @Singleton
 class DaggerViewModelFactory @Inject constructor( private val viewModelMap : Map<Class<out ViewModel>,
         @JvmSuppressWildcards Provider<ViewModel>> ) : ViewModelProvider.Factory {

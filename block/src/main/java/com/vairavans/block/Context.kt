@@ -32,12 +32,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 
+/**
+ * Same as [toast] but takes a string resource id over a [String].
+ */
 fun Context.toast( @StringRes messageResId : Int, duration : Int = Toast.LENGTH_SHORT ) =
     toast( getString( messageResId ), duration )
 
+/**
+ * Extension of [Context] to display a toast.
+ */
 fun Context.toast( message : String, duration : Int = Toast.LENGTH_SHORT ) =
     Toast.makeText( this, message, duration ).show()
 
+/**
+ * Extension of [Context] to create and shown an [AlertDialog].
+ */
 inline fun Context.createAndShowAlertDialog( crossinline block : AlertDialog.Builder.() -> Unit ) : AlertDialog {
 
     return AlertDialog.Builder( this ).apply {
@@ -45,6 +54,9 @@ inline fun Context.createAndShowAlertDialog( crossinline block : AlertDialog.Bui
     }.show()
 }
 
+/**
+ * Extension of [Context] to create a [Notification].
+ */
 inline fun Context.notification( channelId : String, crossinline block : NotificationCompat.Builder.() -> Unit ) :
         Notification {
     return with( NotificationCompat.Builder( this, channelId ) ) {
@@ -53,6 +65,9 @@ inline fun Context.notification( channelId : String, crossinline block : Notific
     }
 }
 
+/**
+ * Extension of [Context] to create a [NotificationChannel].
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 inline fun Context.createNotificationChannel( id : String, name : CharSequence, importance : Int,
                                               block : NotificationChannel.() -> Unit = {} ) : NotificationChannel {
@@ -63,6 +78,9 @@ inline fun Context.createNotificationChannel( id : String, name : CharSequence, 
     return channel
 }
 
+/**
+ * Extension of [Context] to start an activity using an [Intent].
+ */
 inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : (Context) -> Unit ) {
 
     intent.resolveActivity( packageManager )?.let {
@@ -72,6 +90,9 @@ inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : (Con
     }
 }
 
+/**
+ * Extension of [Context] to start a foreground service with support for optional parameters.
+ */
 inline fun <reified T : Service> Context.startForegroundService( block : Intent.() -> Unit = {} ) : Intent {
 
     return Intent( this, T::class.java ).also {
@@ -80,6 +101,9 @@ inline fun <reified T : Service> Context.startForegroundService( block : Intent.
     }
 }
 
+/**
+ * Extension of [Context] to enable/disable an android component.
+ */
 inline fun <reified T> Context.setComponentEnabledSetting( newState: Int,
                                                            flags : Int = PackageManager.DONT_KILL_APP ) {
     packageManager.setComponentEnabledSetting(

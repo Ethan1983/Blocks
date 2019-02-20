@@ -8,6 +8,10 @@ import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
+/**
+ * A [Fragment] to abstract injection. Also supports disabling injection using [enableInjection] which is enabled by
+ * default.
+ */
 abstract class AbsTestableDaggerFragment : Fragment(), HasSupportFragmentInjector {
 
     @Inject

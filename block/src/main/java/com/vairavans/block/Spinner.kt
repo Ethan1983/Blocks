@@ -20,6 +20,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
 
+/**
+ * Extension of [Spinner] to register [onItemSelected] and [onNothingSelected] listeners.
+ */
 inline fun Spinner.setOnItemSelectedListener(
     crossinline onItemSelected : (AdapterView<*>, View?, Int, Long) -> Unit = {_,_,_,_ -> },
     crossinline onNothingSelected: (AdapterView<*>) -> Unit = {}) {

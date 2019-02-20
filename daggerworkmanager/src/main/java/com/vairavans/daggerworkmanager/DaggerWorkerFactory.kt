@@ -9,6 +9,9 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/**
+ * A factory to provide [ListenableWorker] based on configured multi bindings.
+ */
 @Singleton
 class DaggerWorkerFactory @Inject constructor( private val internalWorkerFactoryMap : Map<Class<out ListenableWorker>,
         @JvmSuppressWildcards Provider<InternalWorkerFactory<out ListenableWorker>>>) : WorkerFactory() {

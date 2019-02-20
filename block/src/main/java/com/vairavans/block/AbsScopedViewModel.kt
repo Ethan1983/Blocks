@@ -6,6 +6,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
+/**
+ * A [ViewModel] for Structured concurrency.
+ */
 abstract class AbsScopedViewModel constructor(dispatcher : CoroutineDispatcher) : ViewModel() {
 
     private val viewModelJob = Job()

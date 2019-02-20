@@ -8,6 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import javax.inject.Inject
 
+/**
+ * A [AbsTestableDaggerFragment] abstracting boiler plate associated with setting up a [ViewModel] meant to be used
+ * with [DaggerViewModelFactory] and [ViewModelKey]
+ */
 abstract class AbsDaggerFragment< T : ViewModel > : AbsTestableDaggerFragment() {
 
     @Inject
