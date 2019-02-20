@@ -52,12 +52,6 @@ inline fun <T, U> multiLet( param1 : T?, param2 : U?, block : (T, U) -> Unit ) {
 
 }
 
-class DebugTagTree( val stackElementTag : String? ) : Timber.DebugTree() {
-
-    override fun createStackElementTag(element: StackTraceElement): String =
-        stackElementTag ?: super.createStackElementTag(element) + ":" + element.lineNumber
-}
-
 @Suppress("PROTECTED_CALL_FROM_PUBLIC_INLINE")
 inline fun getTimberDebugTree( crossinline block : () -> String? = { null } ) : DebugTagTree =
     DebugTagTree( block() )
