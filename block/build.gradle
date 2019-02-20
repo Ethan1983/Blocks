@@ -4,9 +4,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
-    testOptions.unitTests.includeAndroidResources = true
-
-
 
     defaultConfig {
         minSdkVersion 14
@@ -31,8 +28,8 @@ android {
         // of these throws an exception and fails unit tests in MainFragmentViewModelTest. The following
         // flag overrides these methods to return default values instead.
         unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
     }
-
 }
 
 dependencies {
@@ -53,7 +50,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.0.2'
-    testImplementation 'io.mockk:mockk:1.9'
+    testImplementation 'io.mockk:mockk:1.9.1'
     testImplementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02' // ViewModelProviders
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

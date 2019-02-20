@@ -5,8 +5,6 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
 
-
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
@@ -23,7 +21,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -38,7 +35,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'javax.inject:javax.inject:1'
     testImplementation 'junit:junit:4.12'
-    testImplementation 'io.mockk:mockk:1.9'
+    testImplementation 'io.mockk:mockk:1.9.1'
 }
 
 apply from: 'publish.gradle'

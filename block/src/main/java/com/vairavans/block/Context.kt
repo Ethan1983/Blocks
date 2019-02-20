@@ -70,7 +70,6 @@ inline fun Context.startActivity(intent : Intent, activityNotFoundHandler : (Con
     } ?: run {
         activityNotFoundHandler(this)
     }
-
 }
 
 inline fun <reified T : Service> Context.startForegroundService( block : Intent.() -> Unit = {} ) : Intent {

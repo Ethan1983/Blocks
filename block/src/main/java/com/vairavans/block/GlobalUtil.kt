@@ -22,7 +22,6 @@ import android.content.Intent
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import timber.log.Timber
 
 inline fun getBroadcastReceiver( crossinline handler : BroadcastReceiver.(Context, Intent) -> Unit ) :
         BroadcastReceiver {

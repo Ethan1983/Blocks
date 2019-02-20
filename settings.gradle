@@ -1,1 +1,1 @@
-include ':block', ':dagger', ':analytics', ':daggerworkmanager', ':espresso'
+include ':block', ':dagger', ':analytics', ':daggerworkmanager', ':espresso', ':ads'
