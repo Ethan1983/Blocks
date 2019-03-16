@@ -17,7 +17,7 @@ In your module `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.vairavans.block:block:1.0.9'
+  implementation 'com.vairavans.block:block:1.0.10'
   implementation 'com.vairavans.dagger:dagger:1.0.4'
   implementation 'com.vairavans.analytics:analytics:1.0.4'
   implementation 'com.vairavans.daggerworkmanager:daggerworkmanager:1.0.3'
