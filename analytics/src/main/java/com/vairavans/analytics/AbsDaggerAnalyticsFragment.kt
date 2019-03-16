@@ -8,7 +8,8 @@ import com.vairavans.dagger.AbsDaggerFragment
 import javax.inject.Inject
 
 /**
- * A [AbsDaggerFragment] with support for [FirebaseAnalytics]
+ * A [AbsDaggerFragment] with support for [FirebaseAnalytics] Use [enableAnalytics] to disable analytics when not
+ * necessary like in debug or test builds.
  */
 abstract class AbsDaggerAnalyticsFragment< T : ViewModel> : AbsDaggerFragment<T>() {
 
@@ -19,17 +20,29 @@ abstract class AbsDaggerAnalyticsFragment< T : ViewModel> : AbsDaggerFragment<T>
 
     abstract var firebaseAnalyticsScreenClassOverride : String
 
+    protected open var enableAnalytics : Boolean = true
+
+    protected fun logAnalyticsEvent( event : String ) {
+        if( enableAnalytics ) {
+            firebaseAnalytics.logEvent( event )
+        }
+    }
+
     @CallSuper
     override fun onResume() {
         super.onResume()
-        firebaseAnalytics.setCurrentScreen( getActivityInternal(), firebaseAnalyticsScreenName,
-            firebaseAnalyticsScreenClassOverride )
+        if( enableAnalytics ) {
+            firebaseAnalytics.setCurrentScreen( getActivityInternal(), firebaseAnalyticsScreenName,
+                firebaseAnalyticsScreenClassOverride )
+        }
     }
 
     @CallSuper
     override fun onPause() {
         super.onPause()
-        firebaseAnalytics.setCurrentScreen( getActivityInternal(), null, null )
+        if( enableAnalytics ) {
+            firebaseAnalytics.setCurrentScreen( getActivityInternal(), null, null )
+        }
     }
 
     internal open fun getActivityInternal() : FragmentActivity = requireActivity()
