@@ -45,3 +45,6 @@ detekt {
         output = "${project.buildDir}/reports/detekt.xml"
     }
 }
+
+// gradlew connectedAndroidTest mergeAndroidReports --continue
+apply plugin: 'android-reporting'
