@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        // http://tools.android.com/tech-docs/unit-testing-support#TOC-Method-...-not-mocked.-
+        // CountingIdlingResource uses android.text.TextUtils and android.os.SystemClock, the stub version
+        // of these throws an exception and fails unit tests in MainFragmentViewModelTest. The following
+        // flag overrides these methods to return default values instead.
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
+}
