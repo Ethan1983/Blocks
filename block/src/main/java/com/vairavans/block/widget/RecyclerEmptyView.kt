@@ -9,8 +9,13 @@ import com.vairavans.block.multiLet
 /**
  * A [RecyclerView] supporting configurable empty view
  */
-class RecyclerEmptyView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView( context, attrs, defStyle ) {
+class RecyclerEmptyView : RecyclerView {
+
+    constructor( context: Context ) : super(context)
+
+    constructor( context: Context, attrs: AttributeSet? ) : super(context, attrs)
+
+    constructor( context: Context, attrs: AttributeSet?, defStyle: Int ) : super(context, attrs, defStyle)
 
     var emptyView : View? = null
     val hiddenViewsOnEmptyDataSet : MutableList<View> = mutableListOf()
