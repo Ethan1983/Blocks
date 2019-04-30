@@ -6,7 +6,7 @@
 
         <provider android:authorities="${applicationId}.workmanager-init"
                   android:name="androidx.work.impl.WorkManagerInitializer"
-                  tools:node="remove"/>
+                  tools:ignore="ExportedContentProvider"/>
 
     </application>
 
