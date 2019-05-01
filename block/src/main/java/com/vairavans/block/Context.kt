@@ -33,7 +33,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 
 /**
- * Same as [toast] but takes a string resource id over a [String].
+ * Same as [Context.toast] but takes a string resource id over a [String].
  */
 fun Context.toast( @StringRes messageResId : Int, duration : Int = Toast.LENGTH_SHORT ) =
     toast( getString( messageResId ), duration )

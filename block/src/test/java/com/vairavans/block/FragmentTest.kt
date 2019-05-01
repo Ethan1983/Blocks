@@ -7,6 +7,8 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.verify
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -62,5 +64,18 @@ class FragmentTest {
         assert( !activityNotFoundHandlerInvoked ) {
             "Handler invoked upon activity found"
         }
+    }
+
+    @Test
+    fun `toast relays request into overloaded toast`() {
+
+        // Extension functions (static) needs mockkStatic
+        mockkStatic("com.vairavans.block.FragmentKt")
+        every { fragment.getString(any()) } returns "1"
+        every { fragment.toast(any<String>(), any()) } just Runs
+
+        fragment.toast( messageResId = 1 )
+
+        verify { fragment.toast(any<String>(), any()) }
     }
 }
