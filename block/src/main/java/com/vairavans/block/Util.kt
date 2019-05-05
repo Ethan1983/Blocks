@@ -33,5 +33,5 @@ inline fun repeatUntil( block: (Int) -> Boolean ) {
 
     var index = 0
 
-    while( block(index++) ) {}
+    while( block(index++) );
 }

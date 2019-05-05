@@ -1,3 +1,4 @@
+@file:Suppress("MatchingDeclarationName")
 package com.vairavans.block
 
 import androidx.lifecycle.LifecycleOwner
