@@ -26,6 +26,7 @@ class AbsObservableViewModelTest {
     sealed class TestViewEffect : ViewEffect() {
         object TestTwoLoadingEffect : TestViewEffect()
         object TestTwoLoadedEffect : TestViewEffect()
+        object TestTwoErrorEffect : TestViewEffect()
         object DefaultEffect : TestViewEffect()
     }
 
@@ -37,6 +38,8 @@ class AbsObservableViewModelTest {
         lateinit var loadingState : TestViewState
         lateinit var loadedEffect : TestViewEffect
         lateinit var loadingEffect : TestViewEffect
+        lateinit var errorState : TestViewState
+        lateinit var errorEffect : TestViewEffect
 
         override fun getInitialViewState(): TestViewState = TestViewState( showLoading = false ).also {
             initialState = it
@@ -75,7 +78,16 @@ class AbsObservableViewModelTest {
         }
 
         override fun getErrorViewState(currentViewState: TestViewState, errorContent: TestResult): TestViewState {
-            TODO("not implemented for tests")
+            return when( errorContent ) {
+                is TestResult.TestOneResult -> {
+                    currentViewState.copy( showLoading = false, data = errorContent.data )
+                }
+                is TestResult.TestTwoResult -> {
+                    currentViewState
+                }
+            }.also {
+                errorState = it
+            }
         }
 
         override fun getLoadingViewEffect(type: KClass<out TestResult>): TestViewEffect {
@@ -102,7 +114,16 @@ class AbsObservableViewModelTest {
         }
 
         override fun getErrorViewEffect(errorContent: TestResult): TestViewEffect {
-            TODO("not implemented for tests")
+            return when( errorContent ) {
+                is TestResult.TestOneResult -> {
+                    TestViewEffect.DefaultEffect
+                }
+                is TestResult.TestTwoResult -> {
+                    TestViewEffect.TestTwoErrorEffect
+                }
+            }.also {
+                errorEffect = it
+            }
         }
 
         open fun Observable<TestEvent.TestOneEvent>.onTestOne() : Observable<Lce<TestResult.TestOneResult>> {
@@ -144,6 +165,29 @@ class AbsObservableViewModelTest {
                 Observable.just(1)
                     .map {
                         Lce.Loading(TestResult.TestTwoResult::class )
+                    }
+            }
+        }
+    }
+
+    class FailingViewModel : AbsTestViewModel() {
+        override val enableLog: Boolean = true
+
+        override fun Observable<TestEvent.TestOneEvent>.onTestOne(): Observable<Lce<TestResult.TestOneResult>> {
+
+            return switchMap {
+                Observable.just(1)
+                    .map {
+                        Lce.Error(TestResult.TestOneResult( emptyList() ) )
+                    }
+            }
+        }
+
+        override fun Observable<TestEvent.TestTwoEvent>.onTestTwo(): Observable<Lce<TestResult.TestTwoResult>> {
+            return switchMap {
+                Observable.just(1)
+                    .map {
+                        Lce.Error(TestResult.TestTwoResult )
                     }
             }
         }
@@ -386,6 +430,83 @@ class AbsObservableViewModelTest {
 
         assert( viewEffect == viewModel.loadingEffect ) {
             "Unexpected loading effect for TestOneEvent"
+        }
+    }
+
+
+    @Test
+    fun `ViewModel returns expected error state on TestOneEvent`() {
+
+        val viewModel = FailingViewModel()
+
+        lateinit var currentViewState : TestViewState
+
+        viewModel.viewState
+            .subscribe { vs ->
+                currentViewState = vs
+            }
+
+        viewModel.processEvent( TestEvent.TestOneEvent )
+
+        assert( currentViewState == viewModel.errorState ) {
+            "Unexpected error state for TestOneEvent"
+        }
+    }
+
+    @Test
+    fun `ViewModel returns expected error state on TestTwoEvent`() {
+
+        val viewModel = FailingViewModel()
+
+        lateinit var currentViewState : TestViewState
+
+        viewModel.viewState
+            .subscribe { vs ->
+                currentViewState = vs
+            }
+
+        viewModel.processEvent( TestEvent.TestTwoEvent )
+
+        assert( currentViewState == viewModel.errorState ) {
+            "Unexpected error state for TestTwoEvent"
+        }
+    }
+
+    @Test
+    fun `ViewModel returns expected error effect on TestTwoEvent`() {
+
+        val viewModel = FailingViewModel()
+
+        lateinit var viewEffect : TestViewEffect
+
+        viewModel.viewEffect
+            .subscribe { vs ->
+                viewEffect = vs
+            }
+
+        viewModel.processEvent( TestEvent.TestTwoEvent )
+
+        assert( viewEffect == viewModel.errorEffect ) {
+            "Unexpected error effect for TestTwoEvent"
+        }
+    }
+
+    @Test
+    fun `ViewModel returns expected error effect on TestOneEvent`() {
+
+        val viewModel = FailingViewModel()
+
+        lateinit var viewEffect : TestViewEffect
+
+        viewModel.viewEffect
+            .subscribe { vs ->
+                viewEffect = vs
+            }
+
+        viewModel.processEvent( TestEvent.TestOneEvent )
+
+        assert( viewEffect == viewModel.errorEffect ) {
+            "Unexpected error effect for TestOneEvent"
         }
     }
 }
