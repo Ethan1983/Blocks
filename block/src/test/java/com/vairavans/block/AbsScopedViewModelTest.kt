@@ -83,10 +83,12 @@ class AbsScopedViewModelTest {
     @Test
     fun `AbsScopedViewModel should cancel coroutines on destroy`() {
 
-        runBlocking<Unit> {
-            viewModel.doSomeCancelableBackgroundTask()
-            controller.destroy()
-        }
+        viewModel.doSomeCancelableBackgroundTask()
+        controller.destroy()
+
+        // Cancel logic will happen in Dispatchers.Default
+        // Sleep main thread to ensure cancel logic completes.
+        Thread.sleep(200)
 
         assert( viewModel.backgroundWorkCanceled ) {
             "Background work is not canceled after destroy"
