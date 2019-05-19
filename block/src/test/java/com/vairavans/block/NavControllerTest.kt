@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -226,5 +228,67 @@ class NavControllerTest {
     private fun callStateSafeNavigateDirectionsAndExtras( state : Lifecycle.State ) {
         every { lifeCycle.currentState } returns state
         navController.stateSafeNavigate( lifeCycle, mockk(), mockk<Navigator.Extras>() )
+    }
+
+    // Tests to ensure stateSafeNavigate avoids Kotlin defaults assuming implementation detail of NavController
+
+    @Test
+    fun `stateSafeNavigate resId relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        navController.stateSafeNavigate( lifeCycle, 12 )
+        verify { navController.navigate( 12 ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate resId Bundles relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val bundle = mockk<Bundle>()
+        navController.stateSafeNavigate( lifeCycle, 12, bundle )
+        verify { navController.navigate( 12, bundle ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate resId Bundles navOptions relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val bundle = mockk<Bundle>()
+        val navOptions = mockk<NavOptions>()
+        navController.stateSafeNavigate( lifeCycle, 12, bundle, navOptions )
+        verify { navController.navigate( 12, bundle, navOptions ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate resId Bundles navOptions extras relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val bundle = mockk<Bundle>()
+        val navOptions = mockk<NavOptions>()
+        val navExtras = mockk<Navigator.Extras>()
+        navController.stateSafeNavigate( lifeCycle, 12, bundle, navOptions, navExtras )
+        verify { navController.navigate( 12, bundle, navOptions, navExtras ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate directions relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val directions = mockk<NavDirections>()
+        navController.stateSafeNavigate( lifeCycle, directions )
+        verify { navController.navigate( directions ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate directions navOptions relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val directions = mockk<NavDirections>()
+        val navOptions = mockk<NavOptions>()
+        navController.stateSafeNavigate( lifeCycle, directions, navOptions )
+        verify { navController.navigate( directions, navOptions ) }
+    }
+
+    @Test
+    fun `stateSafeNavigate directions extras relays to corresponding navigate version`() {
+        every { lifeCycle.currentState } returns Lifecycle.State.RESUMED
+        val directions = mockk<NavDirections>()
+        val navExtras = mockk<Navigator.Extras>()
+        navController.stateSafeNavigate( lifeCycle, directions, navExtras )
+        verify { navController.navigate( directions, navExtras ) }
     }
 }
