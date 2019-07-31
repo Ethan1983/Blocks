@@ -10,7 +10,7 @@ dependencies {
     api ('com.google.dagger:dagger-android-support:2.22.1') {
         because 'api as HasSupportFragmentInjector is exposed as supertype'
     }
-    implementation 'androidx.fragment:fragment:1.1.0-alpha09'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha01'
 }
 
 apply from: 'publish.gradle'
