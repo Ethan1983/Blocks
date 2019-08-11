@@ -7,10 +7,10 @@ dependencies {
     implementation ('androidx.lifecycle:lifecycle-extensions:2.0.0') {
         because 'of ViewModelProviders and is an implementation detail'
     }
-    api ('com.google.dagger:dagger-android-support:2.22.1') {
+    api ('com.google.dagger:dagger-android-support:2.24') {
         because 'api as HasSupportFragmentInjector is exposed as supertype'
     }
-    implementation 'androidx.fragment:fragment:1.2.0-alpha01'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha02'
 }
 
 apply from: 'publish.gradle'

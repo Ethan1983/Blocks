@@ -19,6 +19,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    // Fixes cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     buildTypes {
         release {
             minifyEnabled false

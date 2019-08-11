@@ -4,7 +4,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api (project(':dagger')) {
-        because 'dagger exposes HasSupportFragmentInjector as supertype'
+        because 'dagger exposes HasAndroidInjector as supertype of AbsDaggerAnalyticsFragment'
     }
     api ('com.google.firebase:firebase-core:16.0.7' ) {
         because 'FirebaseAnalytics is exposed in public API'
