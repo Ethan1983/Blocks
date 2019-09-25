@@ -4,7 +4,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api ('com.google.dagger:dagger-android-support:2.24') {
-        because 'HasSupportFragmentInjector is exposed as a supertype of AbsDaggerApplication'
+        because 'HasAndroidInjector is exposed as a supertype of AbsDaggerApplication'
     }
     api ('android.arch.work:work-runtime-ktx:1.0.0-beta03') {
         because 'ListenableWorker is exposed as public api'

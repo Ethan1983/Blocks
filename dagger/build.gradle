@@ -8,9 +8,9 @@ dependencies {
         because 'of ViewModelProviders and is an implementation detail'
     }
     api ('com.google.dagger:dagger-android-support:2.24') {
-        because 'api as HasSupportFragmentInjector is exposed as supertype'
+        because 'api as HasAndroidInjector is exposed as supertype'
     }
-    implementation 'androidx.fragment:fragment:1.2.0-alpha02'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha04'
 }
 
 apply from: 'publish.gradle'

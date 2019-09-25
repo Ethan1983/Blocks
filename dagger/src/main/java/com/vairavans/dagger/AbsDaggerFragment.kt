@@ -26,7 +26,7 @@ abstract class AbsDaggerFragment< T : ViewModel > : AbsTestableDaggerFragment() 
         return onCreateView(inflater, container, savedInstanceState, viewModel )
     }
 
-    internal open fun getInitializedViewModel() : T =
+    protected open fun getInitializedViewModel() : T =
         ViewModelProviders.of( this, viewModelFactory ).get( viewModelClass )
 
     protected abstract fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
