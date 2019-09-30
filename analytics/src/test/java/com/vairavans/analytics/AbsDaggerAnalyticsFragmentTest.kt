@@ -34,9 +34,8 @@ class AbsDaggerAnalyticsFragmentTest {
             return View(inflater.context)
         }
 
-        fun performSomeActionGeneratingAnalyticsEvent( event : String ) {
+        fun performSomeActionGeneratingAnalyticsEvent( event : String ) =
             logAnalyticsEvent( event )
-        }
 
         override fun getActivityInternal() = mockk<FragmentActivity>()
     }

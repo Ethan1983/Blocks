@@ -1,13 +1,10 @@
 package com.vairavans.analytics
 
 import com.google.firebase.analytics.FirebaseAnalytics
-import dagger.android.DaggerService
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-/**
- * A [DaggerService] with support for [FirebaseAnalytics]
- */
-abstract class AbsDaggerAnalyticsService : DaggerService() {
+abstract class AbsDaggerAnalyticsAppCompatActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var firebaseAnalytics: FirebaseAnalytics
