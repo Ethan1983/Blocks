@@ -7,7 +7,7 @@ dependencies {
     api 'com.google.firebase:firebase-ads:18.2.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.mockk:mockk:1.9.1'
-    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation 'org.robolectric:robolectric:4.3'
     implementation 'androidx.appcompat:appcompat:1.1.0' // used only in tests
 }
 
