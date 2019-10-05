@@ -16,6 +16,7 @@
 
 package com.vairavans.block
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
@@ -28,7 +29,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest=Config.NONE)
+@Config(manifest = Config.NONE,sdk = [Build.VERSION_CODES.P])
 class SpinnerTest {
 
     private lateinit var spinner : Spinner

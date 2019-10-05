@@ -33,7 +33,7 @@ class LifecycleTest {
     private fun verifySuccessLifecycleStateInvoke( state : Lifecycle.State ) {
 
         val lifeCycle = mockk<Lifecycle>()
-        every { lifeCycle.currentState } returns Lifecycle.State.STARTED
+        every { lifeCycle.currentState } returns state
 
         var lambdaInvoked = false
 

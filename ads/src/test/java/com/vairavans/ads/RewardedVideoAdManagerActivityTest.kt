@@ -1,5 +1,6 @@
 package com.vairavans.ads
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdView
@@ -16,7 +17,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest= Config.NONE)
+@Config(manifest = Config.NONE,sdk = [Build.VERSION_CODES.P])
 class RewardedVideoAdManagerActivityTest {
 
     private class SampleActivity : AppCompatActivity() {
