@@ -6,9 +6,9 @@ Utility library for Kotlin Android development
 In your project `build.gradle`:
 
 ```groovy
-repositories {
-    maven {
-        url  "https://dl.bintray.com/ethan1983/Blocks"
+allprojects {
+    repositories {
+        jcenter()
     }
 }
 ```
