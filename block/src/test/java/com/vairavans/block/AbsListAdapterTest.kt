@@ -11,7 +11,7 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class AbsListAdapterTest {
 
-    class SampleAdapter( diffCallback: DiffCallback<String, SampleAdapter.ViewHolder> )
+    class SampleAdapter( diffCallback: DiffCallback<String, ViewHolder> )
         : AbsListAdapter<String, SampleAdapter.ViewHolder>( diffCallback = diffCallback ) {
 
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {

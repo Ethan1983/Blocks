@@ -2,34 +2,25 @@ package com.vairavans.ads
 
 import android.content.Context
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.vairavans.block.lifecycle.AbsLifecycleManager
 
 /**
  * Lifecycle manager for [RewardedVideoAd]
  */
-class RewardedVideoAdManager constructor( private val context : Context,
-                                          private val lifeCycle: Lifecycle,
-                                          private val videoAd : RewardedVideoAd ) : LifecycleObserver {
+class RewardedVideoAdManager constructor(private val context : Context, lifeCycle: Lifecycle,
+                                         private val videoAd : RewardedVideoAd )
+    : AbsLifecycleManager(lifeCycle) {
 
-    init {
-        lifeCycle.addObserver( this )
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun resume() {
+    override fun onLifecycleResume() {
         videoAd.resume( context )
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun pause() {
+    override fun onLifecyclePause() {
         videoAd.pause( context )
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun destroy() {
+    override fun onLifecycleDestroy() {
         videoAd.destroy( context )
-        lifeCycle.removeObserver( this )
     }
 }

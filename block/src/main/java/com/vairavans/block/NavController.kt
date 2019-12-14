@@ -85,8 +85,8 @@ fun NavController.stateSafeNavigate(lifecycle : Lifecycle,
 }
 
 /**
- * Same as [NavController.navigate] but throws an [IllegalStateException] when lifecycle is not at least
- * [Lifecycle.State.STARTED] state.
+ * Same as [NavController.navigate] but throws an [IllegalStateException] when lifecycle is not at
+ * least [Lifecycle.State.STARTED] state.
  */
 fun NavController.stateSafeNavigate(lifecycle : Lifecycle,
                                     directions : NavDirections,

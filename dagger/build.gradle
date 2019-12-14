@@ -1,8 +1,6 @@
 apply from: "$rootProject.projectDir/android-library.gradle"
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation ('androidx.lifecycle:lifecycle-extensions:2.0.0') {
         because 'of ViewModelProviders and is an implementation detail'
@@ -10,7 +8,7 @@ dependencies {
     api ('com.google.dagger:dagger-android-support:2.24') {
         because 'api as HasAndroidInjector is exposed as supertype'
     }
-    implementation 'androidx.fragment:fragment:1.2.0-alpha04'
+    implementation 'androidx.fragment:fragment:1.2.0-rc03'
 }
 
 apply from: 'publish.gradle'

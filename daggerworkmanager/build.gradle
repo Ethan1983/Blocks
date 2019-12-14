@@ -1,8 +1,6 @@
 apply from: "$rootProject.projectDir/android-library.gradle"
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     api ('com.google.dagger:dagger-android-support:2.24') {
         because 'HasAndroidInjector is exposed as a supertype of AbsDaggerApplication'
     }

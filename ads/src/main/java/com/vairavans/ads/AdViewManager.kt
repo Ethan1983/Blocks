@@ -1,32 +1,24 @@
 package com.vairavans.ads
 
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.ads.AdView
+import com.vairavans.block.lifecycle.AbsLifecycleManager
 
 /**
  * Lifecycle manager for [AdView]
  */
-class AdViewManager constructor( private val lifeCycle : Lifecycle, private val adView : AdView ) : LifecycleObserver {
+class AdViewManager constructor(lifeCycle : Lifecycle, private val adView : AdView)
+    : AbsLifecycleManager(lifeCycle) {
 
-    init {
-        lifeCycle.addObserver( this )
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun resume() {
+    override fun onLifecycleResume() {
         adView.resume()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun pause() {
+    override fun onLifecyclePause() {
         adView.pause()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun destroy() {
+    override fun onLifecycleDestroy() {
         adView.destroy()
-        lifeCycle.removeObserver( this )
     }
 }

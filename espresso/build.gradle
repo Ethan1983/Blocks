@@ -1,8 +1,6 @@
 apply from: "$rootProject.projectDir/android-library.gradle"
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api ('androidx.test.espresso:espresso-idling-resource:3.2.0') {
         because 'IdlingResource as exposed as a public type'

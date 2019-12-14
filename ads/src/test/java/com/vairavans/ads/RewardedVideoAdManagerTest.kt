@@ -33,26 +33,26 @@ class RewardedVideoAdManagerTest {
     @Test
     fun `RewardedVideoAdManager invokes respective methods on RewardedVideoAd`() {
 
-        rewardedVideoAdManager.resume()
+        rewardedVideoAdManager.onLifecycleResume()
         verify { rewardedVideoAd.resume( any() ) }
 
-        rewardedVideoAdManager.pause()
+        rewardedVideoAdManager.onLifecyclePause()
         verify { rewardedVideoAd.pause( any() ) }
 
-        rewardedVideoAdManager.destroy()
+        rewardedVideoAdManager.onLifecycleDestroy()
         verify { rewardedVideoAd.destroy( any() ) }
     }
 
     @Test
     fun `RewardedVideoAdManager uses provided context for methods on RewardedVideoAd`() {
 
-        rewardedVideoAdManager.resume()
+        rewardedVideoAdManager.onLifecycleResume()
         verify { rewardedVideoAd.resume( context ) }
 
-        rewardedVideoAdManager.pause()
+        rewardedVideoAdManager.onLifecyclePause()
         verify { rewardedVideoAd.pause( context ) }
 
-        rewardedVideoAdManager.destroy()
+        rewardedVideoAdManager.onLifecycleDestroy()
         verify { rewardedVideoAd.destroy( context ) }
     }
 }

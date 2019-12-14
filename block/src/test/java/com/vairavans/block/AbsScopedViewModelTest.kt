@@ -1,5 +1,6 @@
 package com.vairavans.block
 
+import android.os.Build
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.CancellationException
@@ -14,8 +15,10 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(manifest = Config.NONE,sdk = [Build.VERSION_CODES.P])
 class AbsScopedViewModelTest {
 
     private lateinit var viewModel : TestScopedViewModel

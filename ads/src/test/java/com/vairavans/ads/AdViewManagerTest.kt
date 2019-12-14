@@ -30,7 +30,7 @@ class AdViewManagerTest {
     @Test
     fun `AdViewManager invokes resume on AdView`() {
 
-        adViewManager.resume()
+        adViewManager.onLifecycleResume()
 
         verify { adView.resume() }
     }
@@ -38,7 +38,7 @@ class AdViewManagerTest {
     @Test
     fun `AdViewManager invokes pause on AdView`() {
 
-        adViewManager.pause()
+        adViewManager.onLifecyclePause()
 
         verify { adView.pause() }
     }
@@ -46,7 +46,7 @@ class AdViewManagerTest {
     @Test
     fun `AdViewManager invokes destroy on AdView`() {
 
-        adViewManager.destroy()
+        adViewManager.onLifecycleDestroy()
 
         verify { adView.destroy() }
     }
