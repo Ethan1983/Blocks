@@ -14,7 +14,6 @@ abstract class FirebaseAnalyticsModule {
     @Module
     companion object {
 
-        @JvmStatic
         @Provides
         fun provideFirebaseAnalytics( context : Context) : FirebaseAnalytics =
             FirebaseAnalytics.getInstance( context )

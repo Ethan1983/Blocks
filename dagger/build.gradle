@@ -5,7 +5,7 @@ dependencies {
     implementation ('androidx.lifecycle:lifecycle-extensions:2.0.0') {
         because 'of ViewModelProviders and is an implementation detail'
     }
-    api ('com.google.dagger:dagger-android-support:2.24') {
+    api ('com.google.dagger:dagger-android-support:2.25.2') {
         because 'api as HasAndroidInjector is exposed as supertype'
     }
     implementation 'androidx.fragment:fragment:1.2.0-rc03'
